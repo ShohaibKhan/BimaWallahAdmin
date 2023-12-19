@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/allUsers.css">
+    <title>Unverified Agents</title>
+</head>
+
+<body>
+    <h3 class="heading">Unverified Agents</h3>
+    <div class="container">
+        <% if (applicationsJson.length !==0) { %>
+            <ul class="list">
+                <% applicationsJson.forEach(function (application) { %>
+                    <li class="item">
+                        <div class="details">
+                            <div>
+                                <b>PAN:</b>
+                                <%= application.PAN %>
+                            </div>
+                            <div>
+                                <b>Name:</b>
+                                <%= application.panName %>(As per PAN)
+                            </div>
+
+                            <div>
+                                <b>Policy Types:</b>
+                                <% application.policyTypes.forEach(function (name) { %>
+                                    <span>
+                                        <%= name%>,
+                                    </span> &nbsp
+                                    <%})%>
+                            </div>
+
+
+                    </li>
+
+                    <form action="/allUsers" method="GET">
+                        <button type="submit" class="show">Show</button>
+                    </form>
+
+
+                    <% }) %>
+
+            </ul>
+            <%}%>
+    </div>
+</body>
+
+</html>
