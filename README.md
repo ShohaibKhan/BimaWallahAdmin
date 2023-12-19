@@ -1,4 +1,4 @@
-=> Don't Share cnfig.js, since the repository is private so included in the directory
+=> Don't Share config.js, since the repository is private so included in the directory
 
 
 steps to run the application:
