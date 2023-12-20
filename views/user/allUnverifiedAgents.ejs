@@ -33,11 +33,11 @@
                                     </span> &nbsp
                                     <%})%>
                             </div>
-
-
+                        </div>
                     </li>
 
-                    <form action="/allUsers" method="GET">
+                    <form action="/application" method="GET">
+                        <input type="hidden" name="userRef" id="userRef" value="<%=application.userRef%>">
                         <button type="submit" class="show">Show</button>
                     </form>
 

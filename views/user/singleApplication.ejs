@@ -5,45 +5,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Application</title>
+    <link rel="stylesheet" href="/stylesheets/allUsers.css">
 </head>
 
 <body>
-    <li class="item">
-        <div class="details">
-            <div>
-                <b>Username:</b>
-                <%= user.display_name %>
-            </div>
+    <h3 class="heading">User Details</h3>
+    <div class="main">
 
-            <div>
-                <b>Phone number:</b>
-                <%= user.phone_number %>
-            </div>
-            <!-- Add more user fields as needed -->
-
-            <div>
-                <b>Email:</b>
-                <%= user.email %>
-            </div>
-
-            <%if (user.is_employer==true){%>
+        <li class="item" style="display: flex; justify-content: center;">
+            <div class="details">
                 <div>
-                    <b>is Employer:</b> YES
+                    <b>Username:</b>
+                    <%= user.display_name %>
                 </div>
-                <div>
-                    <b>Work email:</b>
-                    <%= user.work_email %>
-                </div>
-                <%}%>
-                    <%if (user.is_agent==true){%>
-                        <div>
-                            <b>is Agent:</b> YES
-                        </div>
 
-                        <%}%>
+                <div>
+                    <b>Phone number:</b>
+                    <%= user.phone_number %>
+                </div>
+                <!-- Add more user fields as needed -->
+
+                <div>
+                    <b>Email:</b>
+                    <%= user.email %>
+                </div>
+
+                <%if (user.is_employer==true){%>
+                    <div>
+                        <b>is Employer:</b> YES
+                    </div>
+                    <div>
+                        <b>Work email:</b>
+                        <%= user.work_email %>
+                    </div>
+                    <%}%>
+                        <%if (user.is_agent==true){%>
+                            <div>
+                                <b>is Agent:</b> YES
+                            </div>
+
+                            <%}%>
+
+            </div>
+        </li>
+
+    </div>
+    <h3 class="heading">Application Details</h3>
+
+    <div class="main2">
+        <div class="one">
+
+            <img src="https://firebasestorage.googleapis.com/v0/b/bimawallah-deb52.appspot.com/o/users%2FzkQC4OqK0aX1jYTmPRXu1Rv1ws63%2Fuploads%2F2023-11-29%2014%3A43%3A09.395?alt=media&token=bf3cd9b7-1f5e-4ceb-8628-9daf113bfcf1"
+                alt="" width="48%" height="99%">
+            <img src="https://firebasestorage.googleapis.com/v0/b/bimawallah-deb52.appspot.com/o/users%2FzkQC4OqK0aX1jYTmPRXu1Rv1ws63%2Fuploads%2F2023-11-29%2014%3A43%3A09.395?alt=media&token=bf3cd9b7-1f5e-4ceb-8628-9daf113bfcf1"
+                alt="" width="48%" height="99%">
 
         </div>
-    </li>
+        <div class="two">
+            <li class="item">
+                <div class="details">
+                    <div>
+                        <b>PAN:</b>
+                        <%= application.PAN %>
+                    </div>
+                    <div>
+                        <b>Name:</b>
+                        <%= application.panName %>(As per PAN)
+                    </div>
+
+                    <div>
+                        <b>Policy Types:</b>
+                        <% application.policyTypes.forEach(function (name) { %>
+                            <span>
+                                <%= name%>,
+                            </span> &nbsp
+                            <%})%>
+                    </div>
+
+                </div>
+            </li>
+        </div>
+    </div>
+
+    <div class="btns">
+
+        <div class="form">
+            <form action="/postReject" method="POST">
+                <button class="edit" style="width: 100%;">Reject</button>
+            </form>
+
+        </div>
+        <div class="form">
+
+            <form action="/postAccept" method="POST">
+                <input type="hidden" name="userRef" id="userRef" value="<%= application.userRef%>">
+                <button class="show" style="width: 100%;">Veify as Agent</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
+
+<style>
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main2,
+    .btns {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .one {
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+    }
+
+    .two {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+    }
+
+    .item {
+
+        width: 100%;
+        height: 100%;
+    }
+
+    .btns {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .form {
+        width: 48%;
+    }
+</style>

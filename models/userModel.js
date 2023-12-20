@@ -12,30 +12,60 @@ exports.getAllUsers = async (req, res) => {
     return userList;
 }
 
-exports.getAllAgentApplications = async (req, res) => {
+async function getAllApplications(){
     const applicationsCol = collection(db, 'agentApplication');
     const applicationSnapshot = await getDocs(applicationsCol);
-    // const userList = userSnapshot.docs
-    //     .filter(doc => doc.exists() && (doc.data().is_agent === undefined || !doc.data().is_agent)) // Check for document existence and is_Agent field
-    //     .map(doc => doc.data());
-    const applicationList = applicationSnapshot.docs
-        .map(doc => doc.data());
-    return applicationList;
+    
+    const applicationList = applicationSnapshot.docs.map(doc => doc.data())
+    
+    return applicationList
+    
 }
 
-exports.getSingleUser = async (req, res, userRef) => {
-    const users = collection(db, 'users');
+exports.getAllAgentApplications = async (req, res) => {
+
+    return getAllApplications();
+    
+}
+
+
+
+exports.getSingleUser = async (req, res) => {
+
+    let arr = [0,0];
+    const usersSingle = collection(db, 'users');
+    const userSnapshotSingle = await getDocs(usersSingle);
+    const userListSingle = userSnapshotSingle.docs
+        .filter(doc => doc.exists() && (doc.data().uid === req)) // Check for document existence and is_Agent field
+        .map(doc => doc.data());
+    arr[0] = userListSingle[0];
+    const applicationListSingle = getAllApplications();
+
+    await applicationListSingle.then(res=>{
+        arr[1] = res.filter((d)=>d.userRef == req)[0];
+    })
 
     // Query the 'users' collection based on the provided userRef
-    const query = query(users, where('uid', '==', userRef));
-    const userSnapshot = await getDocs(query);
-    console.log(userSnapshot);
-    // Check if any document matches the query
-    if (userSnapshot.empty) {
-        return null; // No matching user found
-    }
-
-    // Extract and return the data of the first matching user
-    const userData = userSnapshot.docs[0].data();
-    return userData;
+    
+    return arr;
 };
+
+exports.deleteAgentApplication = async (req, res) => {
+    const applicationsColDelete = collection(db, 'agentApplication');
+    const applicationSnapshotDelete = (await getDocs(applicationsColDelete)).docs;
+    applicationSnapshotDelete.forEach(async ele=>{
+        if (ele.data().userRef == req){
+            console.log("deleted successfully!");
+            await applicationsColDelete.doc(ele).delete();
+            console.log("deleted successfully!")
+        }
+        else{
+            console.log(ele.data().userRef, req);
+        }
+    })
+    
+};
+
+
+
+
