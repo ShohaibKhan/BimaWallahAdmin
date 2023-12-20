@@ -15,9 +15,20 @@ exports.getAllUnverfied = (req,res)=>{
     })
 }
 
-exports.singleApplication = (req,res,userRef)=>{
-    userModel.getSingleUser(userRef)
-    .then(user=>{
-        res.render("user/singleApplication",{"user":user})
+exports.singleApplication = (req,res)=>{
+    
+    
+    userModel.getSingleUser(req.query.userRef)
+    .then(data=>{
+       
+        res.render("user/singleApplication",{"user":data[0], "application":data[1]})
     })
+}
+
+exports.handleReject = (req,res)=>{
+    console.log("ref is", req.query.userRef);
+   userModel.deleteAgentApplication(req.query.userRef);
+       
+    res.redirect("/unverifiedAgents");
+
 }

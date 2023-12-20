@@ -9,6 +9,9 @@ const userController = require('../controllers/userControler')
 router.get("/allUsers",userController.getAllUsers);
 router.get("/unverifiedAgents",userController.getAllUnverfied);
 router.get("/unverifiedAgents",userController.singleApplication);
+router.get("/application",userController.singleApplication);
+router.post("/postReject",userController.handleReject);
+
 
 
 module.exports = router
