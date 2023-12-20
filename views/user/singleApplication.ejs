@@ -91,6 +91,7 @@
 
         <div class="form">
             <form action="/postReject" method="POST">
+                <input type="hidden" name="userRef" id="userRef" value="<%=application.userRef%>">
                 <button class="edit" style="width: 100%;">Reject</button>
             </form>
 
@@ -98,7 +99,7 @@
         <div class="form">
 
             <form action="/postAccept" method="POST">
-                <input type="hidden" name="userRef" id="userRef" value="<%= application.userRef%>">
+                <input type="hidden" name="userRef" id="userRef" value="<%=application.userRef%>">
                 <button class="show" style="width: 100%;">Veify as Agent</button>
             </form>
         </div>

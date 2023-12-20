@@ -26,8 +26,17 @@ exports.singleApplication = (req,res)=>{
 }
 
 exports.handleReject = (req,res)=>{
-    console.log("ref is", req.query.userRef);
-   userModel.deleteAgentApplication(req.query.userRef);
+    
+   userModel.deleteAgentApplication(req.body.userRef);
+       
+    res.redirect("/unverifiedAgents");
+
+}
+
+exports.handleAccept = (req,res)=>{
+    console.log("ref is", req.body.userRef);
+    
+   userModel.updateFieldByRef(req.body.userRef);
        
     res.redirect("/unverifiedAgents");
 
