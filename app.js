@@ -11,7 +11,7 @@ const userRoutes = require("./Routes/userRoutes");
 app.use(userRoutes);
 
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.render("home");
 })
 
 
