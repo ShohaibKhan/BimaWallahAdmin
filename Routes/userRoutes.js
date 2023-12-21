@@ -11,6 +11,7 @@ router.get("/unverifiedAgents",userController.getAllUnverfied);
 router.get("/unverifiedAgents",userController.singleApplication);
 router.get("/application",userController.singleApplication);
 router.post("/postReject",userController.handleReject);
+
 router.post("/postAccept",userController.handleAccept);
 
 
