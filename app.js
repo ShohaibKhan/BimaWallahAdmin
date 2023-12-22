@@ -10,10 +10,6 @@ app.set("view engine","ejs");
 const userRoutes = require("./Routes/userRoutes");
 app.use(userRoutes);
 
-app.get('/', (req, res) => {
-  res.render("home");
-})
-
 
 app.listen(3000,()=>{
   console.log("server restarted!");

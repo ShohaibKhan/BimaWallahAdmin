@@ -17,25 +17,27 @@
                 <ul class="list">
                     <% applicationsJson.forEach(function (application) { %>
                         <li class="item">
-                            <div class="details">
-                                <div>
-                                    <b>PAN:</b>
-                                    <%= application.PAN %>
-                                </div>
-                                <div>
-                                    <b>Name:</b>
-                                    <%= application.panName %>(As per PAN)
+                            <%if (application.verified==false){%>
+                                <div class="details">
+                                    <div>
+                                        <b>PAN:</b>
+                                        <%= application.PAN %>
+                                    </div>
+                                    <div>
+                                        <b>Name:</b>
+                                        <%= application.panName %>(As per PAN)
+                                    </div>
+
+                                    <div>
+                                        <b>Policy Types:</b>
+                                        <% application.policyTypes.forEach(function (name) { %>
+                                            <span>
+                                                <%= name%>,
+                                            </span> &nbsp
+                                            <%})%>
+                                    </div>
                                 </div>
 
-                                <div>
-                                    <b>Policy Types:</b>
-                                    <% application.policyTypes.forEach(function (name) { %>
-                                        <span>
-                                            <%= name%>,
-                                        </span> &nbsp
-                                        <%})%>
-                                </div>
-                            </div>
                         </li>
 
                         <form action="/application" method="GET">
@@ -44,7 +46,7 @@
                         </form>
 
 
-                        <% }) %>
+                        <% }}) %>
 
                 </ul>
                 <%}%>

@@ -74,7 +74,6 @@ exports.deleteAgentApplication = async (req, res) => {
 exports.updateFieldByRef=async(req,res)=>{
     const colName = collection(db, 'users');
     const docName = (await getDocs(colName)).docs;
-    console.log()
     docName.forEach(async ele=>{
         if (ele.data().uid == req){
             const userDocRef = doc(colName,req);
@@ -84,11 +83,57 @@ exports.updateFieldByRef=async(req,res)=>{
             };
             await updateDoc(userDocRef,updateData);
         }
-        else{
-            console.log(ele.data().userRef, req);
+    
+    });
+    console.log("updating the agentDoc");
+    const colName2 = collection(db, 'agentApplication');
+    const docName2 = (await getDocs(colName2)).docs;
+    docName2.forEach(async ele=>{
+        if (ele.data().userRef == req){
+            console.log("updated the doc");
+            const applicationRef = doc(colName2,ele.id);
+            const updateData = {
+                verified: true,
+            };
+            await updateDoc(applicationRef,updateData);
         }
-    })
+    });
+
 }
+
+exports.updateDYN = async (req,res)=>{
+    console.log("the data got is", req);
+    const colName = collection(db, 'dyn');
+    const docName =  (await getDocs(colName)).docs;
+    for (const ele of docName){
+        console.log("data extracted is", ele.data());
+        if (ele.data().unique == true){
+            console.log("updated DYN!", ele.id);
+            const dynDOC = doc(colName,ele.id);
+            const updateData = {
+                title: req.title,
+                description:req.desc[1],
+                semDesc:req.desc[0],
+            };
+            await updateDoc(dynDOC,updateData);
+            console.log("sending true");
+            return true;
+        };
+    };
+    return false;
+
+}
+exports.getDYN = async(req,res)=>{
+
+    const dynCol = collection(db, 'dyn');
+    const dynSnapshot = await getDocs(dynCol);
+    
+    const dynList = dynSnapshot.docs.map(doc => doc.data());
+    
+    return dynList[0];
+
+}
+
 
 
 
