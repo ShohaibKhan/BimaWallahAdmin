@@ -36,8 +36,30 @@ exports.handleReject = (req,res)=>{
 exports.handleAccept = (req,res)=>{
     console.log("ref is", req.body.userRef);
     
-   userModel.updateFieldByRef(req.body.userRef);
+    userModel.updateFieldByRef(req.body.userRef);
        
     res.redirect("/unverifiedAgents");
 
+}
+
+exports.homePage = (req,res)=>{
+
+    userModel.getDYN()
+    .then(result=>{
+        res.render("home",{"dyn":result});
+    });
+
+}
+exports.postDYN = async(req,res)=>{
+
+    console.log("posting the DYN data");
+    let result = await userModel.updateDYN(req.body);
+    console.log("result is ", result);
+    if (result){
+        console.log("success");
+        res.redirect("/");
+    }else{
+        console.log("reject");
+    }
+    
 }
