@@ -7,6 +7,9 @@ const policyController = require('../controllers/policyController');
 // this router is exported later so that all the routes of this file can be handled easily using express
 
 router.get("/verifyPolicies",policyController.unverifiedpolicies);
+router.get("/singlePolicy",policyController.getSinglePolicy);
+
+// router.post("/postPolicy",policyController.postPolicy);
 
 
 

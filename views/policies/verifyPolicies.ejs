@@ -16,26 +16,30 @@
             <div class="container">
                 <% if (policies.length !==0) { %>
                     <ul class="list">
-                        <% policies.forEach(function (policy) { %>
-                            <li class="item">
-                                <div class="details">
-                                    <div>
-                                        <b>policy Type:</b>
-                                        <%= policy.policy_type %>
-                                    </div>
+                        <% for (const key in policies) { %>
+                            <%policies[key].forEach(function(policy){%>
+                                <li class="item">
+                                    <div class="details">
+                                        <div>
+                                            <b>policy Type:</b>
+                                            <%= policy.policy_type %>
+                                        </div>
 
-                                    <div>
-                                        <b>phone number:</b>
-                                        <%= policy.phoneNumber %>
-                                    </div>
-                                    <!-- Add more user fields as needed -->
+                                        <div>
+                                            <b>phone number:</b>
+                                            <%= policy.phoneNumber %>
+                                        </div>
+                                        <!-- Add more user fields as needed -->
 
-                                </div>
-                            </li>
-                            <form action="/unverifiedAgents" method="GET">
-                                <button type="submit" class="show">Show</button>
-                            </form>
-                            <% }) %>
+                                    </div>
+                                </li>
+                                <form action="/singlePolicy" method="GET">
+                                    <input type="hidden" name="policy" value='<%= JSON.stringify(policy)%>' id="policy">
+                                    <input type="hidden" name="userRef" value="<%= key%>" id="userRef">
+                                    <button type="submit" class="show">Show</button>
+                                </form>
+                                <%})%>
+                                    <% }%>
 
                     </ul>
                     <%}%>
