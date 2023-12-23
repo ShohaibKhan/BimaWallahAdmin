@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/allUsers.css">
     <link rel="stylesheet" href="/stylesheets/navBar.css">
-    <title>Verify Policies</title>
+    <title>Policy Types</title>
 </head>
 <%- include("../includes/navBar")%>
 
     <body>
         <div class="mainContainer">
-            <h3 class="heading">All Policies to Verify</h3>
+            <h3 class="heading">All Policy Types</h3>
             <div class="container">
-                <% if (policies.length !==0) { %>
+                <% if (policytypeJson.length !==0) { %>
                     <ul class="list">
-                        <% for (const key in policies) { %>
-                            <%policies[key].forEach(function(policy){%>
+                        <% for (const key in policytypeJson) { %>
+                            <%policytypeJson[key].forEach(function(policytype){%>
                                 <li class="item">
                                     <div class="details">
                                         <div>

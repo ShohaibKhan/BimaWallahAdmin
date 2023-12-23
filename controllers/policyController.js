@@ -15,7 +15,14 @@ exports.getSinglePolicy = (req,res)=>{
     const expiryDateUTC = new Date(timestampSeconds * 1000); // Multiply by 1000 to convert seconds to milliseconds
     const formattedExpiryDate = expiryDateUTC.toISOString(); // Convert to ISO string for UTC representation
     jsonData.expiry_date = formattedExpiryDate.split("T")[0];
-
-    console.log(jsonData);
     res.render("policies/singlePolicy",{"policy":jsonData,"userRef":req.query.userRef});
+}
+
+exports.postPolicy=async (req,res)=>{
+    let result = await policyModel. updatePolicy(req.body);
+    console.log(result);
+    if (result){
+        console.log("success");
+        res.redirect("/verifyPolicies");
+    }
 }

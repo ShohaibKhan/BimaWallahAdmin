@@ -9,7 +9,7 @@ const policyController = require('../controllers/policyController');
 router.get("/verifyPolicies",policyController.unverifiedpolicies);
 router.get("/singlePolicy",policyController.getSinglePolicy);
 
-// router.post("/postPolicy",policyController.postPolicy);
+router.post("/postPolicy",policyController.postPolicy);
 
 
 

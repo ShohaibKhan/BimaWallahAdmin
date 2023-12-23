@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Policy</title>
     <link rel="stylesheet" href="/stylesheets/allUsers.css">
     <link rel="stylesheet" href="/stylesheets/navBar.css">
+    <title>Policy</title>
 </head>
 <%- include("../includes/navBar")%>
 
@@ -103,16 +103,17 @@
                             </fieldset>
                             <div class="field">
 
-                                <span><b>Policy Number: </b></span><input type="text" name="policyNo" id="policyNo"
-                                    required>
+                                <span><b>Policy Number: </b></span><input type="text" name="policyNo" id="policyNo">
                             </div>
                             <div class="field">
 
-                                <span><b>Name or Number: </b></span><input type="text" name="non" id="non" required>
+                                <span><b>Name or Number: </b></span><input type="text" name="non" id="non">
                             </div>
+                            <input type="hidden" name="userRef" value="<%= userRef%>" id="userRef">
+                            <input type="hidden" name="policyID" value="<%= policy.policyID%>" id="policyID">
 
 
-                            <div class="show btns">Save Policy</div>
+                            <button class="show btns">save Policy</button>
                         </div>
                     </form>
                 </div>
