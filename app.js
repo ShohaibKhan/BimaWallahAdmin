@@ -8,7 +8,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.set("view engine","ejs");
 
 const userRoutes = require("./Routes/userRoutes");
+const policyRoutes = require("./Routes/policyRoutes");
+
 app.use(userRoutes);
+app.use(policyRoutes);
 
 
 app.listen(3000,()=>{
