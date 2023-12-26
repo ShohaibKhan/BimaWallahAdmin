@@ -53,38 +53,37 @@
             border-radius: 5px;
             cursor: pointer;
             width: fit-content;
-            
         }
     </style>
     <div class="mainContainer">
-        <h3 class="heading">All Policy Types</h3>
-        <form action="/NewPolicyType" method="GET">
-            <div class="addPolicyType"><button type="submit" class="show">Add New Policy Type</button></div>
+        <h3 class="heading">All Policy Providers</h3>
+        <form action="/NewPolicyProvider" method="GET">
+            <div class="addPolicyType"><button type="submit" class="show">Add New Policy Provider</button></div>
         </form>
         <div class="container">
-            <% if (policytypeJson.length !== 0) { %>
+            <% if (policyProviderJson.length !== 0) { %>
                 <ul class="list">
-                    <% for (const key in policytypeJson) { %>
-                        <% const policyDetails = policytypeJson[key].data; %>
+                    <% for (const key in policyProviderJson) { %>
+                        <% const policyDetails = policyProviderJson[key].data; %>
                         <li class="item">
                             <div class="details">
                                 <div class ="image">
-                                    <b>policy Type Image:</b>
-                                        <img src="<%= policyDetails.policy_img %>" alt="one" width="30%" height="50%">
+                                    <b>policy Provider Image:</b>
+                                        <img src="<%= policyDetails.provider_img %>" alt="one" width="30%" height="50%">
                                 </div>
 
                                 <div class ="type">
-                                    <b>policy Type:</b>
-                                    <%= policyDetails.policy_type %>
+                                    <b>policy Provider:</b>
+                                    <%= policyDetails.provider_name %>
                                 </div>
                                 <!-- Add more details as needed -->
 
                             </div>
                         </li>
-                        <form action="/editPolicyType" method="GET">
-                            <input type="hidden" name="policyType" value='<%= policyDetails.policy_type%>' id="policytype">
-                            <input type="hidden" name="policyImage" value="<%= policyDetails.policy_img%>" id="policyImage">
-                            <input type="hidden" name="policyTypeRef" value="<%= policytypeJson[key].id%>" id="policyTypeRef">
+                        <form action="/editPolicyProvider" method="GET">
+                            <input type="hidden" name="policyProvider" value='<%= policyDetails.provider_name%>' id="policyProvider">
+                            <input type="hidden" name="policyProviderImage" value="<%= policyDetails.provider_img%>" id="policyProviderImage">
+                            <input type="hidden" name="policyProviderRef" value="<%= policyProviderJson[key].id%>" id="policyProviderRef">
                             <button type="submit" class="show">Edit</button>
                         </form>
                     <% } %>

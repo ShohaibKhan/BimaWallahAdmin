@@ -1,5 +1,5 @@
 const { all } = require("../Routes/userRoutes");
-const db = require("../config");
+const {db,storage} = require("../config");
 const { collection, getDocs, deleteDoc, updateDoc, doc } = require('firebase/firestore');
 
 
@@ -15,9 +15,6 @@ async function getAllPolicies(uid){
 async function getAllUsers() {
     const usersCol = collection(db, 'users');
     const userSnapshot = await getDocs(usersCol);
-    // const userList = userSnapshot.docs
-    //     .filter(doc => doc.exists() && (doc.data().is_agent === undefined || !doc.data().is_agent)) // Check for document existence and is_Agent field
-    //     .map(doc => doc.data());
     const userList = userSnapshot.docs.map(doc=>doc.data())
     return userList;
 }

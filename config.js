@@ -1,5 +1,6 @@
 const { initializeApp } = require('firebase/app');
 const { getFirestore } = require('firebase/firestore');
+const { getStorage } = require('firebase/storage');
 
 const firebaseConfig = {
   type: "service_account",
@@ -9,6 +10,7 @@ const firebaseConfig = {
   client_email: "firebase-adminsdk-uehtd@bimawallah-deb52.iam.gserviceaccount.com",
   client_id: "112890657533169352521",
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
+  storageBucket: 'bimawallah-deb52.appspot.com',
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
   client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-uehtd%40bimawallah-deb52.iam.gserviceaccount.com",
@@ -17,4 +19,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-module.exports = db;
+const storage=getStorage(app);
+
+module.exports = {db,storage};

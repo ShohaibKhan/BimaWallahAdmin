@@ -1,4 +1,4 @@
-const db = require("../config");
+const {db,storage} = require("../config");
 const { collection, getDocs, deleteDoc, updateDoc, doc } = require('firebase/firestore');
 
 exports.getAllUsers = async (req, res) => {
